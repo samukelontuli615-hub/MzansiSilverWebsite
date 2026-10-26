@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="Discover Mzansi Silver, a video discovery and rewards app. Every ad is another step towards your treasure.">
+  <title>Mzansi Silver | Your Next Adventure</title>
+
+  <style>
+    :root {
+      --black: #080808;
+      --surface: #141414;
+      --yellow: #ffcc00;
+      --white: #ffffff;
+      --muted: #aaaaaa;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1100px, 90%); margin: auto; }
+
+    header {
+      border-bottom: 1px solid #242424;
+      background: rgba(8, 8, 8, 0.96);
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(12px);
+    }
+    nav {
+      min-height: 76px; display: flex; justify-content: space-between;
+      align-items: center; gap: 20px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 20px; }
+    .diamond {
+      width: 27px; height: 27px; background: var(--yellow);
+      transform: rotate(45deg); border-radius: 3px;
+      box-shadow: 0 0 22px #ffcc0040; flex-shrink: 0;
+    }
+    .nav-links { display: flex; gap: 25px; align-items: center; font-size: 14px; color: #cccccc; }
+    .nav-links a:hover { color: var(--yellow); }
+    .button {
+      display: inline-block; background: var(--yellow); color: #080808;
+      padding: 13px 23px; border-radius: 8px; font-weight: 800;
+      border: 0; cursor: pointer; transition: transform .2s, box-shadow .2s;
+    }
+    .button:hover { transform: translateY(-2px); box-shadow: 0 8px 25px #ffcc0030; }
+    .button-outline { background: transparent; color: var(--white); border: 1px solid #444; }
+
+    .hero {
+      min-height: 610px; display: flex; align-items: center; text-align: center;
+      padding: 90px 0;
+      background: radial-gradient(ellipse at 50% 30%, #ffcc0012, transparent 55%);
+    }
+    .hero-content { max-width: 800px; margin: auto; }
+    .hero .diamond { width: 54px; height: 54px; margin: 0 auto 35px; border-radius: 5px; }
+    .eyebrow {
+      color: var(--yellow); font-size: 12px; letter-spacing: 3px;
+      font-weight: 800; text-transform: uppercase; margin-bottom: 20px;
+    }
+    h1 { font-size: clamp(40px, 7vw, 76px); line-height: 1.08; letter-spacing: -2px; margin-bottom: 25px; }
+    h1 span { color: var(--yellow); }
+    .hero p { max-width: 590px; margin: 0 auto 30px; color: var(--muted); font-size: 17px; }
+    .hero-actions { display: flex; justify-content: center; gap: 13px; flex-wrap: wrap; }
+    section { padding: 85px 0; }
+    .section-heading { text-align: center; max-width: 650px; margin: 0 auto 45px; }
+    h2 { font-size: clamp(29px, 4vw, 43px); line-height: 1.2; margin-bottom: 15px; }
+    .section-heading p, .card p { color: var(--muted); }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card { background: var(--surface); border: 1px solid #262626; border-radius: 16px; padding: 30px; }
+    .step-number {
+      width: 44px; height: 44px; display: grid; place-items: center;
+      background: #ffcc0018; color: var(--yellow); border-radius: 12px;
+      font-size: 19px; font-weight: 900; margin-bottom: 23px;
+    }
+    h3 { font-size: 20px; margin-bottom: 10px; }
+
+    .showcase { background: #101010; border-top: 1px solid #222; border-bottom: 1px solid #222; }
+    .showcase-inner { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 55px; }
+    .showcase-copy p { color: var(--muted); margin-bottom: 25px; }
+    .rewards {
+      margin-top: 20px; padding: 22px; background: #ffcc000c;
+      border: 1px solid #ffcc0030; border-radius: 12px;
+    }
+    .rewards strong { color: var(--yellow); }
+
+    /* Real app screenshots */
+    .screenshots { min-width: 0; }
+    .screenshot-feature {
+      overflow: hidden; border: 1px solid #3b3217; border-radius: 22px;
+      background: #050505; box-shadow: 0 20px 55px #0008;
+    }
+    .screenshot-feature img {
+      display: block; width: 100%; max-height: 590px; object-fit: contain;
+      object-position: center top; background: #050505;
+    }
+    .screenshot-caption { padding: 14px 18px; color: var(--muted); font-size: 13px; border-top: 1px solid #252525; }
+    .screenshot-picker {
+      display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 9px; margin-top: 12px;
+    }
+    .screenshot-thumb {
+      padding: 4px; border: 1px solid #333; border-radius: 10px;
+      background: #171717; cursor: pointer; overflow: hidden;
+      transition: border-color .2s, transform .2s;
+    }
+    .screenshot-thumb:hover { transform: translateY(-2px); border-color: #88701b; }
+    .screenshot-thumb[aria-pressed="true"] { border: 2px solid var(--yellow); padding: 3px; }
+    .screenshot-thumb img { display: block; width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 6px; }
+    .screenshot-thumb span { display: block; font-size: 10px; padding: 5px 0 2px; color: #ddd; }
+    .showcase-copy .rewards p { margin: 8px 0 0; }
+
+    .cta {
+      text-align: center; padding: 90px 0;
+      background: radial-gradient(ellipse at center, #ffcc0010, transparent 65%);
+    }
+    .cta p { color: var(--muted); max-width: 550px; margin: 0 auto 28px; }
+    .download-note { color: #888; font-size: 12px; margin-top: 16px; }
+    footer { border-top: 1px solid #262626; padding: 28px 0; color: var(--muted); font-size: 13px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
+
+    @media (max-width: 700px) {
+      .nav-links { gap: 13px; font-size: 12px; }
+      .nav-links .nav-cta { display: none; }
+      .brand { font-size: 17px; }
+      .steps, .showcase-inner { grid-template-columns: 1fr; }
+      .hero { min-height: 550px; padding: 70px 0; }
+      section { padding: 65px 0; }
+      .card { padding: 25px; }
+      h1 { letter-spacing: -1px; }
+      .screenshot-feature img { max-height: 70vh; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="container">
+      <a href="#home" class="brand" aria-label="Mzansi Silver home">
+        <span class="diamond" aria-hidden="true"></span>
+        <span>Mzansi Silver</span>
+      </a>
+      <div class="nav-links">
+        <a href="#how-it-works">How it works</a>
+        <a href="#about">About</a>
+        <a href="#get-started" class="nav-cta">Get started</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-content">
+        <div class="diamond" aria-hidden="true"></div>
+        <div class="eyebrow">Your next adventure begins here</div>
+        <h1>Every ad is another step towards your <span>treasure.</span></h1>
+        <p>Discover videos, explore new things, and earn Silver through the Mzansi Silver rewards experience.</p>
+        <div class="hero-actions">
+          <a href="#how-it-works" class="button">Explore the app</a>
+          <a href="#about" class="button button-outline">Discover Mzansi Silver</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Your journey</div>
+          <h2>Three steps. One adventure.</h2>
+          <p>Discover how the Mzansi Silver experience is designed to work.</p>
+        </div>
+        <div class="steps">
+          <article class="card">
+            <div class="step-number">01</div>
+            <h3>Discover videos</h3>
+            <p>Explore videos and discover content through the Watch experience.</p>
+          </article>
+          <article class="card">
+            <div class="step-number">02</div>
+            <h3>Earn Silver</h3>
+            <p>Earn Silver through eligible rewarded ads and available in-app activities.</p>
+          </article>
+          <article class="card">
+            <div class="step-number">03</div>
+            <h3>Explore rewards</h3>
+            <p>Check your Silver balance and explore the rewards and redemption options available in the app.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="showcase" id="about">
+      <div class="container showcase-inner">
+        <div class="screenshots">
+          <div class="screenshot-feature">
+            <img id="featured-screenshot" src="screenshots/watch.jpeg" alt="Mzansi Silver Watch screen showing a video discovery feed" loading="eager">
+            <div class="screenshot-caption" id="screenshot-caption">Watch — discover videos in the Mzansi Silver app.</div>
+          </div>
+          <div class="screenshot-picker" aria-label="Choose an app screenshot">
+            <button class="screenshot-thumb" type="button" data-image="screenshots/home.jpeg" data-alt="Mzansi Silver Home screen" data-caption="Home — view your Silver balance and daily journey." aria-label="Show Home screenshot" aria-pressed="false">
+              <img src="screenshots/home.jpeg" alt="" loading="lazy"><span>Home</span>
+            </button>
+            <button class="screenshot-thumb" type="button" data-image="screenshots/watch.jpeg" data-alt="Mzansi Silver Watch screen" data-caption="Watch — discover videos in the Mzansi Silver app." aria-label="Show Watch screenshot" aria-pressed="true">
+              <img src="screenshots/watch.jpeg" alt="" loading="lazy"><span>Watch</span>
+            </button>
+            <button class="screenshot-thumb" type="button" data-image="screenshots/rewards.jpeg" data-alt="Mzansi Silver Rewards screen" data-caption="Rewards — see the daily treasure wheel and your Silver." aria-label="Show Rewards screenshot" aria-pressed="false">
+              <img src="screenshots/rewards.jpeg" alt="" loading="lazy"><span>Rewards</span>
+            </button>
+            <button class="screenshot-thumb" type="button" data-image="screenshots/wallet.jpeg" data-alt="Mzansi Silver Wallet screen" data-caption="Wallet — check your balance and cash-out progress." aria-label="Show Wallet screenshot" aria-pressed="false">
+              <img src="screenshots/wallet.jpeg" alt="" loading="lazy"><span>Wallet</span>
+            </button>
+            <button class="screenshot-thumb" type="button" data-image="screenshots/profile.jpeg" data-alt="Mzansi Silver Profile screen" data-caption="Profile — view your account and activity." aria-label="Show Profile screenshot" aria-pressed="false">
+              <img src="screenshots/profile.jpeg" alt="" loading="lazy"><span>Profile</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="showcase-copy">
+          <div class="eyebrow">Meet the experience</div>
+          <h2>A little discovery. A little treasure.</h2>
+          <p>Mzansi Silver is a video discovery and rewards app built around a simple idea: make every visit an opportunity to discover something new.</p>
+          <div class="rewards">
+            <strong>Your Silver. Your journey.</strong>
+            <p>Track your in-app Silver balance and review the redemption options available to you.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="get-started">
+      <div class="container">
+        <div class="eyebrow">The adventure awaits</div>
+        <h2>Your journey starts with Mzansi Silver.</h2>
+        <p>Discover videos, earn Silver through eligible rewarded ads, and explore the rewards experience.</p>
+
+        <a
+          href="https://github.com/samukelontuli615-hub/MzansiSilver-Releases/releases/download/v1.0.0/Mzansi.SILVER-v1.0.0.apk"
+          class="button"
+        >Download for Android ↓</a>
+
+        <p class="download-note">Android APK · Version 1.0.0 · 54.8 MB</p>
+      </div>
+    </section>
+  
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>◆ Mzansi Silver</span>
+      <span>Every ad is another step towards your treasure.</span>
+      <span>© <span id="year"></span> Mzansi Silver</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const featuredScreenshot = document.getElementById('featured-screenshot');
+    const screenshotCaption = document.getElementById('screenshot-caption');
+    const screenshotButtons = document.querySelectorAll('.screenshot-thumb');
+
+    screenshotButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        featuredScreenshot.src = button.dataset.image;
+        featuredScreenshot.alt = button.dataset.alt;
+        screenshotCaption.textContent = button.dataset.caption;
+
+        screenshotButtons.forEach((item) => {
+          item.setAttribute('aria-pressed', String(item === button));
+        });
+      });
+    });
+  </script>
+</body>
+</html>
